@@ -1,2 +1,4 @@
-# MS-Azure-Demos
-Microsoft Azure Demonstrations
+# Microsoft Azure Demonstrations
+Includes following,
+
+ - CosmosDB
