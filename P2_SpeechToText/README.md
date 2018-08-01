@@ -64,6 +64,13 @@ We add/install this package,
     info : Package 'Microsoft.CognitiveServices.Speech' is compatible with all the specified frameworks in project 'D:\P2_SpeechRecognition\P2_SpeechRecognition.csproj'.
     info : PackageReference for package 'Microsoft.CognitiveServices.Speech' version '0.5.0' added to file 'D:\P2_SpeechRecognition\P2_SpeechRecognition.csproj'.
 
+We need to update following line with correct key and region,
+
+    var factory = SpeechFactory.FromSubscription("MY_SUBSCRIPTION_KEY", "SERVICE_REGION");
+
+A region example is `westus`. Please note the key is not your subscription id
+but the key of the Speech API.
+
 Then, we build/run the console application and we say something for speech
 recognition when the console asks to do so,
 
@@ -93,7 +100,7 @@ time to time.
 ## Summary of API
 Here is a brief overview,
 Microsoft.CognitiveServices.Speech Namespace contains 17 classes. SpeechFactory
-is used for speech to text recognition.
+is one of the classes used for speech to text recognition.
 
 To authenticate SpeechFactory has 3 ways,
 
@@ -119,20 +126,33 @@ class SpeechFactory has following methods to instatiate an action,
  - SpeechRecognitionResult
  - DetailedSpeechRecognitionResult
 
-There is 10 seconds cut off for short duration recognition.
+There is 10 seconds cut off for short duration recognition. If we are looking
+properties such as confidence and phrases we have to use
+`DetailedSpeechRecognitionResult`.
 
-## Epilogue
-As we can see we can perform speech to text recognition for short duration with
-the API call demonstrated above. Similarly, long running recognition can
-be performed using `StartContinuousRecognitionAsync`. API reference also shows
-the capacity of doing it from streams which make live streaming and dictation
-possible.
+## Comparison with Google Cloud Speech
+Google cloud speech API supports 7 audio formats including lossless flac format
+for audio file input. Its limitations are at [google cloud speech quotas][4].
 
 As the ASR stats showed, Microsoft and Google are pretty close in error rates
 of word recognition, IBM seems to be lagging behind a bit.
 
 This Speech API and Google cloud Speech API both support streaming and
 recognition from audio files. However, supported audio formats are different.
+
+## Epilogue
+Speech to Text supports about 10 languages. Bangla/Bengali is not yet
+supported.
+Text to Speech supports about 48 languages.
+
+If we want to utilize user specfic voice identification and intents we need to
+utilize LUIS service instead.
+
+As we can see we can perform speech to text recognition for short duration with
+the API call demonstrated above. Similarly, long running recognition can
+be performed using `StartContinuousRecognitionAsync`. API reference also shows
+the capacity of doing it from streams which make live streaming and dictation
+possible.
 
 If you are interested in Google Cloud Speech API demo using .net core please
 refer to my previous demo on google cloud speech API which peacefully resides
@@ -146,3 +166,4 @@ at, [my github - .net core google cloud speech][3]
   [1]: https://docs.microsoft.com/en-us/azure/cognitive-services/speech-service/get-started#create-a-speech-resource-in-azure
   [2]: https://docs.microsoft.com/en-us/dotnet/api/microsoft.cognitiveservices.speech
   [3]: https://github.com/atiq-cs/net-core-google-cloud/tree/master/speech
+  [4]: https://cloud.google.com/speech-to-text/quotas
