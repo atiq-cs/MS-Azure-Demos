@@ -2,9 +2,9 @@
 using System.Threading.Tasks;
 using Microsoft.CognitiveServices.Speech;
 
-namespace helloworld {
-  class Program {
-    public static async Task RecognizeSpeechAsync()
+namespace CognitiveServices {
+  class SpeechToText {
+    public async Task RecognizeSpeechAsync()
     {
       // Creates an instance of a speech factory with specified
       // subscription key and service region. Replace with your own subscription key
@@ -12,8 +12,7 @@ namespace helloworld {
       var factory = SpeechFactory.FromSubscription("MY_SUBSCRIPTION_KEY", "SERVICE_REGION");
 
       // Creates a speech recognizer.
-      using (var recognizer = factory.CreateSpeechRecognizer())
-      {
+      using (var recognizer = factory.CreateSpeechRecognizer()) {
         Console.WriteLine("Say something...");
 
         // Performs recognition.
@@ -23,20 +22,14 @@ namespace helloworld {
         var result = await recognizer.RecognizeAsync();
 
         // Checks result.
-        if (result.RecognitionStatus != RecognitionStatus.Recognized)
-        {
+        if (result.RecognitionStatus != RecognitionStatus.Recognized) {
           Console.WriteLine($"Recognition status: {result.RecognitionStatus.ToString()}");
           if (result.RecognitionStatus == RecognitionStatus.Canceled)
-          {
             Console.WriteLine($"There was an error, reason: {result.RecognitionFailureReason}");
-          }
           else
-          {
             Console.WriteLine("No speech could be recognized.\n");
-          }
         }
-        else
-        {
+        else {
           Console.WriteLine($"We recognized: {result.Text}");
           Console.WriteLine("Some additional information below,");
           Console.WriteLine($"Duration: {result.Duration}, offset in seconds:" +
@@ -45,10 +38,13 @@ namespace helloworld {
         }
       }
     }
+  }
 
-    static void Main()
+  class Program {
+    static async Task Main()
     {
-      RecognizeSpeechAsync().Wait();
+      var speechDemo = new SpeechToText();
+      await speechDemo.RecognizeSpeechAsync();
       Console.WriteLine("Please press a key to continue.");
       Console.ReadLine();
     }
