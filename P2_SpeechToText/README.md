@@ -1,6 +1,7 @@
 # Microsoft Azure Cognitive Services - Speech API Demo
 ## Speech to Text Demo
-This is second demo of Microsoft Azure. However, this is more of a Cognitive Services demo.
+This is second demo of Microsoft Azure. However, this is more of a Cognitive
+Services demo.
 
 First, we need to create a cognitive services API resource in Azure Portal. If
 we choose a wrong API we get an error like below, at a later stage, when we
@@ -12,6 +13,12 @@ build/run,
     There was an error, reason: WebSocket Upgrade failed with an authentication
     error (401). Please check the subscription key or the authorization token,
     and the region name.
+
+An example of wrong API, in this context would be to select the Speech API
+during creating a resource in the cloud portal that is used to identify
+user voice and intents.  Please don't confuse with "Speech Recognition
+(previous)" API. Instruction can be found at Azure Docs -
+[Create a Speech resource in Azure][1] to select the right API.
 
 To create a console project we do,
 
@@ -27,6 +34,9 @@ To create a console project we do,
 
     Restore succeeded.
 
+We rename `Program.cs` to `Speech.cs`,
+
+    $ Move-Item Program.cs Speech.cs
     $ cd P2_SpeechRecognition
 
 We can run it with code,
@@ -53,7 +63,8 @@ We add/install this package,
     info : Package 'Microsoft.CognitiveServices.Speech' is compatible with all the specified frameworks in project 'D:\P2_SpeechRecognition\P2_SpeechRecognition.csproj'.
     info : PackageReference for package 'Microsoft.CognitiveServices.Speech' version '0.5.0' added to file 'D:\P2_SpeechRecognition\P2_SpeechRecognition.csproj'.
 
-Then we build/run we say something when the console asks so,
+Then, we build/run the console application and we say something for speech
+recognition when the console asks to do so,
 
     $ dotnet run
     Say something...
@@ -64,9 +75,9 @@ Then we build/run we say something when the console asks so,
 Here is a brief overview,
 
 ## References
- - Primary reference - [Azure Cosmos DB: Getting started with the SQL API and .NET Core][1]
- - On cosmos db, [how it evolved from document db][2]
+ - Azure Docs - [Create a Speech resource in Azure][1]
+ - Cognitive Services Documentation root for .net - [Microsoft.CognitiveServices.Speech Namespace][2]
 
 
-  [1]: https://docs.microsoft.com/en-us/azure/cosmos-db/sql-api-dotnetcore-get-started
-  [2]: https://stackoverflow.com/questions/43932359/what-are-the-differences-between-cosmodb-and-documentdb
+  [1]: https://docs.microsoft.com/en-us/azure/cognitive-services/speech-service/get-started#create-a-speech-resource-in-azure
+  [2]: https://docs.microsoft.com/en-us/dotnet/api/microsoft.cognitiveservices.speech
