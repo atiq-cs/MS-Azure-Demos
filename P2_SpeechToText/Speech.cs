@@ -2,8 +2,10 @@
 using System.Threading.Tasks;
 using Microsoft.CognitiveServices.Speech;
 
-namespace CognitiveServices {
-  class SpeechToText {
+namespace CognitiveServices
+{
+  class SpeechToText
+  {
     public async Task RecognizeSpeechAsync()
     {
       // Creates an instance of a speech factory with specified
@@ -12,7 +14,8 @@ namespace CognitiveServices {
       var factory = SpeechFactory.FromSubscription("MY_SUBSCRIPTION_KEY", "SERVICE_REGION");
 
       // Creates a speech recognizer.
-      using (var recognizer = factory.CreateSpeechRecognizer()) {
+      using (var recognizer = factory.CreateSpeechRecognizer())
+      {
         Console.WriteLine("Say something...");
 
         // Performs recognition.
@@ -22,25 +25,28 @@ namespace CognitiveServices {
         var result = await recognizer.RecognizeAsync();
 
         // Checks result.
-        if (result.RecognitionStatus != RecognitionStatus.Recognized) {
+        if (result.RecognitionStatus != RecognitionStatus.Recognized)
+        {
           Console.WriteLine($"Recognition status: {result.RecognitionStatus.ToString()}");
           if (result.RecognitionStatus == RecognitionStatus.Canceled)
             Console.WriteLine($"There was an error, reason: {result.RecognitionFailureReason}");
           else
             Console.WriteLine("No speech could be recognized.\n");
         }
-        else {
+        else
+        {
           Console.WriteLine($"We recognized: {result.Text}");
           Console.WriteLine("Some additional information below,");
           Console.WriteLine($"Duration: {result.Duration}, offset in seconds:" +
-            $"{TimeSpan.FromTicks(result.OffsetInTicks).TotalSeconds}, result"
-            + $" id: {result.ResultId}");
+              $"{TimeSpan.FromTicks(result.OffsetInTicks).TotalSeconds}, result"
+              + $" id: {result.ResultId}");
         }
       }
     }
   }
 
-  class Program {
+  class Program
+  {
     static async Task Main()
     {
       var speechDemo = new SpeechToText();
